@@ -189,7 +189,6 @@ const DAYS = [
       { text: "Пройди распаковку личности", link: { label: "Пройти распаковку", url: "https://t.me/Womans_Bloging_club_bot?startapp=bdb0a722f47fb2a4" } },
       { text: "Определи тему, направление и формат канала", link: { label: "Идеи для блога", url: "https://t.me/c/2834183143/4751" } },
       { text: "Составь позиционирование", link: { label: "Изучить статью о позиционировании", url: "https://telegra.ph/Pozicionirovanie-v-bloge-04-29" }, details: POS_TASK },
-      "Придумай название блога",
       { text: "Создай канал", link: { label: "Как создать канал", url: "https://t.me/c/3811870554/16/515" } },
       { text: "Составь банк идей для постов", prompt: PROMPT_BANK },
     ],
@@ -197,7 +196,6 @@ const DAYS = [
   {
     n: 2, lesson: "Упаковка блога", icon: "🎯", cover: COVER_2, link: "https://t.me/c/3811870554/779/1606",
     tasks: [
-      "Заполни таблицу позиционирования",
       {
         text: "Выбери название",
         links: [
@@ -222,7 +220,7 @@ const DAYS = [
       { text: "Создай пост-навигацию / приветствие и закрепи его", link: { label: "Что писать в закреплённом сообщении", url: "https://t.me/c/3811870554/16/521" } },
       {
         text: "Создай лид-магнит и выложи его на канале (по желанию)",
-        details: `Лид-магнит — это полезный материал, который помогает решить какую-то проблему твоей аудитории. Советую всегда добавлять лид-магнит в закреп — это особенно помогает при продвижении блога.
+        hint: `Лид-магнит — это полезный материал, который помогает решить какую-то проблему твоей аудитории. Советую всегда добавлять лид-магнит в закреп — это особенно помогает при продвижении блога.
 
 По ссылке — инструкция, как создать пост с синей кнопкой и выдачей лид-магнита по подписке.
 
@@ -570,7 +568,7 @@ export default function RoadmapApp() {
                           const checked = !!(progress[d.n] && progress[d.n][idx]);
                           const taskKey = d.n + ":" + idx;
                           const isOpen = openTask === taskKey;
-                          const hasExpand = !!(t.details || t.prompt);
+                          const hasExpand = !!(t.details || t.prompt || t.hint);
                           return (
                             <div key={idx} className="py-1">
                               <label
@@ -616,10 +614,20 @@ export default function RoadmapApp() {
                                       type="button"
                                       onClick={() => setOpenTask(isOpen ? null : taskKey)}
                                       className="text-[12px] font-semibold"
-                                      style={{ color: C.pinkPillText }}
+                                      style={{ color: t.hint ? C.badgeFinalText : C.pinkPillText }}
                                     >
-                                      {isOpen ? "Скрыть задание ↑" : "Открыть задание ↓"}
+                                      {t.hint
+                                        ? (isOpen ? "💡 Скрыть подсказку ↑" : "💡 Подсказка ↓")
+                                        : (isOpen ? "Скрыть задание ↑" : "Открыть задание ↓")}
                                     </button>
+                                  )}
+                                  {isOpen && t.hint && (
+                                    <div
+                                      className="w-full rounded-xl px-4 py-3 text-[12.5px]"
+                                      style={{ background: C.badgeFinalBg, border: "1px solid " + C.badgeFinalBorder, color: C.inkSoft, whiteSpace: "pre-line", lineHeight: 1.5 }}
+                                    >
+                                      {t.hint}
+                                    </div>
                                   )}
                                   {isOpen && t.details && (
                                     <div
