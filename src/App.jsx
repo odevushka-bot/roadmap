@@ -255,7 +255,16 @@ const DAYS = [
     ],
     note: "Присылай посты в чат 💬 — наше комьюнити засыплет тебя лайками и комментами!",
   },
-  { n: 4, lesson: "Начинаем продвижение", icon: "📣", tasks: ["Зарегистрируйся в Pinterest", "Оформи профиль", "Переключись на бизнес-аккаунт", "Добавь ссылку на блог"], note: "Не спеши переходить к следующему дню, пока не выполнишь задания." },
+  {
+    n: 4, lesson: "Начинаем продвижение", icon: "📣", link: "https://t.me/c/3811870554/2/848",
+    tasks: [
+      "Зарегистрируйся в Pinterest",
+      { text: "Оформи профиль", link: { label: "Как оформить профиль", url: "https://t.me/c/3811870554/2/854" } },
+      "Переключись на бизнес-аккаунт",
+      { text: "Добавь ссылку на блог", link: { label: "Как добавить ссылку на блог", url: "https://t.me/c/3811870554/2/887" } },
+    ],
+    note: "Не спеши переходить к следующему дню, пока не выполнишь задания.",
+  },
   { n: 5, lesson: "Создание первых пинов", icon: "🖼️", tasks: ["Выбери тему для пина", "Создай 3 пина по уроку", "Сохрани дизайны", "Подготовь описание и заголовки"] },
   { n: 6, lesson: "Оформление шаблонов", icon: "🔲", tasks: ["Выбери стиль оформления", "Создай 2–3 шаблона пинов", "Сохрани в Canva", "Подготовь обложки для постов"], note: "Лучше 30 минут каждый день, чем один день раз в месяц." },
   { n: 7, lesson: "Создание первых 10 пинов", icon: "⭐", tasks: ["Создай 10 пинов", "Заполни описания (SEO)", "Проверь ключевые слова", "Сохрани и подготовь к публикации"] },
@@ -565,6 +574,20 @@ export default function RoadmapApp() {
                             <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
                           </div>
                         )
+                      ) : d.link ? (
+                        <a
+                          href={d.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-xl h-20 flex flex-col items-center justify-center"
+                          style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}
+                        >
+                          <span className="text-xl">{d.icon}</span>
+                          <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
+                          <span className="text-[10px] font-semibold mt-1 inline-flex items-center gap-1">
+                            <Play className="w-2.5 h-2.5" fill="currentColor" /> Смотреть урок
+                          </span>
+                        </a>
                       ) : (
                         <div className="rounded-xl h-20 flex flex-col items-center justify-center" style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}>
                           <span className="text-xl">{d.icon}</span>
