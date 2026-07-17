@@ -435,10 +435,11 @@ export default function RoadmapApp() {
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             placeholder="you@example.com"
-            className="w-full rounded-xl px-4 py-3 text-sm outline-none transition"
+            className="w-full rounded-xl px-4 py-3 outline-none transition"
             style={{
               border: "1px solid " + (focused ? C.focusRing : C.inputBorder),
               color: C.ink,
+              fontSize: "16px",
               boxShadow: focused ? "0 0 0 3px " + C.pinkPillBg : "none",
             }}
             autoFocus
