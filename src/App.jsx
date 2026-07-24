@@ -395,6 +395,14 @@ const DAYS = [
     ],
     dividerAfter: "🚀 Начинаем продвижение",
   },
+  {
+    n: 26, lesson: "Типы и виды пинов", icon: "🗂️",
+    description: "Разбираем, какие есть типы и виды пинов и какие у них цели, создаём себе шаблоны для пинов.",
+    tasks: ["задание 1", "задание 2", "задание 3", "задание 4"],
+    placeholder: true,
+  },
+  { n: 27, lesson: "Воронка подписчика", icon: "🌀", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 28, lesson: "ИИ для продвижения", icon: "🤖", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
   { n: 9, lesson: "Создание первых пинов", icon: "🖼️", tasks: ["Выбери тему для пина", "Создай 3 пина по уроку", "Сохрани дизайны", "Подготовь описание и заголовки"] },
   { n: 10, lesson: "Оформление шаблонов", icon: "🔲", tasks: ["Выбери стиль оформления", "Создай 2–3 шаблона пинов", "Сохрани в Canva", "Подготовь обложки для постов"], note: "Лучше 30 минут каждый день, чем один день раз в месяц." },
   { n: 11, lesson: "Создание первых 10 пинов", icon: "⭐", tasks: ["Создай 10 пинов", "Заполни описания (SEO)", "Проверь ключевые слова", "Сохрани и подготовь к публикации"] },
@@ -688,9 +696,9 @@ export default function RoadmapApp() {
     </div>
   );
 
-  const renderCover = (d) => {
+  const renderCover = (d, { linkable = true } = {}) => {
     if (d.cover) {
-      return d.link ? (
+      return d.link && linkable ? (
         <a href={d.link} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="block relative rounded-xl overflow-hidden group" style={{ aspectRatio: "16/10" }}>
           <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
           <div className="absolute inset-0 transition" style={{ background: "rgba(0,0,0,0.12)" }} />
@@ -706,7 +714,7 @@ export default function RoadmapApp() {
         </div>
       );
     }
-    if (d.link) {
+    if (d.link && linkable) {
       return (
         <a
           href={d.link}
@@ -717,7 +725,6 @@ export default function RoadmapApp() {
           style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}
         >
           <span className="text-xl">{d.icon}</span>
-          <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
           <span className="text-[10px] font-semibold mt-1 inline-flex items-center gap-1">
             <Play className="w-2.5 h-2.5" fill="currentColor" /> Смотреть урок
           </span>
@@ -727,7 +734,6 @@ export default function RoadmapApp() {
     return (
       <div className="rounded-xl h-20 flex flex-col items-center justify-center" style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}>
         <span className="text-xl">{d.icon}</span>
-        <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
       </div>
     );
   };
@@ -1023,7 +1029,7 @@ export default function RoadmapApp() {
                     }}
                   >
                     <span className="block absolute -top-3 right-6 text-lg" style={{ transform: "rotate(12deg)" }}>📎</span>
-                    <div className="w-24 sm:w-28 shrink-0">{renderCover(d)}</div>
+                    <div className="w-24 sm:w-28 shrink-0">{renderCover(d, { linkable: false })}</div>
 
                     <div className="flex-1 min-w-0">
                       {d.special && (
