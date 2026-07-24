@@ -411,6 +411,12 @@ const DAYS = [
   {
     n: 26, lesson: "Типы и виды пинов", icon: "🗂️",
     description: "Разбираем, какие есть типы и виды пинов и какие у них цели, создаём себе шаблоны для пинов.",
+    videos: [
+      { title: "Типы и виды пинов" },
+      { title: "Воронка подписчика" },
+      { title: "Шаблоны пинов" },
+      { title: "Генерим шаблоны с ИИ" },
+    ],
     tasks: ["задание 1", "задание 2", "задание 3", "задание 4"],
     placeholder: true,
   },
@@ -951,7 +957,25 @@ export default function RoadmapApp() {
               <p className="text-sm mb-4" style={{ color: C.brownText }}>{d.description}</p>
             )}
 
-            <div className="max-w-xs mb-5">{renderCover(d)}</div>
+            {d.videos ? (
+              <div className="flex flex-col gap-3 mb-5">
+                {d.videos.map((v, vi) => (
+                  <div
+                    key={vi}
+                    className="rounded-xl px-4 py-3 flex items-center gap-3"
+                    style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}
+                  >
+                    <span className="text-lg shrink-0">🎬</span>
+                    <div className="min-w-0">
+                      <p className="text-[10px] font-bold uppercase tracking-wide opacity-70">Видео {vi + 1}</p>
+                      <p className="text-sm font-extrabold truncate">{v.title}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="max-w-xs mb-5">{renderCover(d)}</div>
+            )}
 
             {d.tasks.length > 0 && (
               <>
