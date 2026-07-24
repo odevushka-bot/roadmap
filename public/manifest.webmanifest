@@ -1,6 +1,6 @@
 {
-  "name": "Дорожная карта — 21 день",
-  "short_name": "21 день",
+  "name": "Карта продвижения",
+  "short_name": "Карта",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fdfcfa",

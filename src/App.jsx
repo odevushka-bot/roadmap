@@ -497,6 +497,49 @@ const PROMPTS_LIBRARY = [
 
 const PROMPT_CATEGORIES = ["Все", ...Array.from(new Set(PROMPTS_LIBRARY.map((p) => p.category).filter(Boolean)))];
 
+const MATERIALS_PAGE = [
+  {
+    title: "Дизайн",
+    blocks: [
+      {
+        heading: "Файлы",
+        items: ["Библиотека стилей", "Шаблоны пинов для Canva", "Палитры", "База шрифтов"],
+      },
+      {
+        heading: "Полезное",
+        items: [
+          "Где генерить изображения",
+          "Где брать стоковые файлы",
+          "Инструкция: как скачать Canva",
+          "Как оплатить Canva (если нужно)",
+        ],
+      },
+    ],
+  },
+  {
+    title: "ИИ",
+    blocks: [
+      {
+        heading: "Полезное",
+        items: [
+          { text: "База промптов", internalHash: "promptbase" },
+          "Как скачать ChatGPT (инструкция)",
+          "Как купить подписку в ChatGPT или любую другую",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Больше о Pinterest",
+    blocks: [
+      {
+        heading: "Полезное",
+        items: ["Как смотреть статистику по чужим пинам", "Разбор самых частых ошибок"],
+      },
+    ],
+  },
+];
+
 const DAYS = [
   {
     n: 1, lesson: "Распаковка личности", icon: "🧬",
@@ -618,7 +661,52 @@ const DAYS = [
   },
   {
     n: 8, lesson: "Доски на Pinterest", icon: "📁",
-    link: "https://t.me/c/3811870554/2/885",
+    body: [
+      { type: "heading", text: "Завершаем упаковку профиля" },
+      { type: "p", text: "Доски - это как «папки», которые объединяют пины по какому-то признаку и дают дополнительный буст ко всем пинам." },
+      { type: "p", text: "У каждой доски есть свое название и описание. Сюда мы также в вставляем ключевые слова." },
+      { type: "p", text: "Алгоритмы пинтерест смотрят на ключевые слова на доске, к которой прикреплен пин." },
+      { type: "p", text: "Если доски упакованы правильно – пины продвигаются лучше и имеют больше просмотров." },
+      { type: "p", text: "Также, пины на пинтерест продвигаются ПАЧКАМИ, по своим доскам. То есть, когда пользователь нажимает на ваш пин – рядом ему покажут другие ваши пины из этой же доски." },
+      { type: "p", text: "Поэтому, похожий контент лучше добавлять на одну и ту же доску." },
+      { type: "p", text: "Например, доска со схемами раскладов таро - все схемы в одном месте." },
+      { type: "p", text: "Доска с разбором матрицы судьбы на тему «деньги» - все варианты чисел и толкований в одном месте." },
+      { type: "heading", text: "Задание" },
+      { type: "p", text: "Изучите информацию на карточках и создайте 2-4 доски по вашим ключевым темам." },
+      { type: "heading", text: "Описание доски" },
+      {
+        type: "list",
+        items: [
+          "название из ключевых слов",
+          "в начале описания доски – призыв перейти по ссылке или в профиль",
+          "далее, описание из ключевых слов",
+        ],
+      },
+      { type: "heading", text: "Важно" },
+      {
+        type: "list",
+        items: [
+          "Заполняйте все поля описания ПО МАКСИМУМУ, это 50 символов в названии и 500 в описании",
+          "Прописываем максимальное кол-во ключей для каждой доски",
+          { text: "Используйте ключи и широкого профиля, и узкие запросы", link: { label: "как искать ключи", url: "https://vk.ru/@womans_bloging-urok-4" } },
+        ],
+      },
+      { type: "p", text: "Прямо сейчас вам достаточно выделить ключевые темы, на которые вы будете говорить и создать доски под эти темы." },
+      { type: "heading", text: "Как выбрать темы для досок" },
+      {
+        type: "list",
+        items: [
+          "2-4 экспертные доски по всем темам, на которые вы будете говорить на вашем канале",
+          "1-2 доски на широкую аудиторию (например: цитаты и аффирмации, психология и саморазвитие, мифология, эстетика, дизайн)",
+          "кейсы / отзывы / про продукт",
+        ],
+      },
+      { type: "heading", text: "Доски на широкую аудиторию" },
+      { type: "p", text: "Это доски ориентированные на широкую аудиторию - рекомендации книг, мотивационные цитаты, обои с цитатами, и др." },
+      { type: "p", text: "У вас обязательно должны быть такие виды досок, чтобы привлекать больше аудитории." },
+      { type: "p", text: "Если трудно найти темы для досок, посмотрите, что публикуют другие люди по вашей теме 👇🏻" },
+      { type: "link", label: "Аккаунты для примера", url: "https://m.vk.ru/@womans_bloging-akkaunty-po-raznym-nisham" },
+    ],
     tasks: [
       "Создай тематические доски",
       { text: "Напиши описания досок", hint: "Добавь ключевые слова в каждую доску" },
@@ -702,6 +790,9 @@ function getHashLessonN() {
 function getHashIsPromptBase() {
   return window.location.hash === "#promptbase";
 }
+function getHashIsMaterials() {
+  return window.location.hash === "#materials";
+}
 
 export default function RoadmapApp() {
   const [email, setEmail] = useState(null);
@@ -717,11 +808,13 @@ export default function RoadmapApp() {
   const [lessonN, setLessonN] = useState(() => getHashLessonN());
   const [promptBase, setPromptBase] = useState(() => getHashIsPromptBase());
   const [promptFilter, setPromptFilter] = useState("Все");
+  const [materialsPage, setMaterialsPage] = useState(() => getHashIsMaterials());
 
   useEffect(() => {
     const onHashChange = () => {
       setLessonN(getHashLessonN());
       setPromptBase(getHashIsPromptBase());
+      setMaterialsPage(getHashIsMaterials());
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
@@ -733,10 +826,14 @@ export default function RoadmapApp() {
   const openPromptBase = () => {
     window.location.hash = "promptbase";
   };
+  const openMaterials = () => {
+    window.location.hash = "materials";
+  };
   const closeLesson = () => {
     window.location.hash = "";
     setLessonN(null);
     setPromptBase(false);
+    setMaterialsPage(false);
   };
 
   useEffect(() => {
@@ -1007,6 +1104,56 @@ export default function RoadmapApp() {
     );
   };
 
+  const renderBody = (body) => (
+    <div className="flex flex-col gap-3 mb-5 text-[13.5px]" style={{ color: C.inkSoft, lineHeight: 1.6 }}>
+      {body.map((block, i) => {
+        if (block.type === "heading") {
+          return <h3 key={i} className="text-sm font-extrabold mt-1" style={{ color: C.cardTitle }}>{block.text}</h3>;
+        }
+        if (block.type === "p") {
+          return <p key={i}>{block.text}</p>;
+        }
+        if (block.type === "list") {
+          return (
+            <ul key={i} className="list-disc pl-5 flex flex-col gap-1">
+              {block.items.map((item, ii) => {
+                const it = typeof item === "string" ? { text: item } : item;
+                return (
+                  <li key={ii}>
+                    {it.text}
+                    {it.link && (
+                      <>
+                        {" "}
+                        <a href={it.link.url} target="_blank" rel="noreferrer" className="font-semibold" style={{ color: C.pinkPillText }}>
+                          {it.link.label}
+                        </a>
+                      </>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        }
+        if (block.type === "link") {
+          return (
+            <a
+              key={i}
+              href={block.url}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold inline-flex items-center gap-1 w-fit"
+              style={{ color: C.pinkPillText }}
+            >
+              → {block.label}
+            </a>
+          );
+        }
+        return null;
+      })}
+    </div>
+  );
+
   if (booting) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center" style={gridBg}>
@@ -1024,7 +1171,7 @@ export default function RoadmapApp() {
           className="w-full max-w-sm rounded-2xl p-8"
           style={{ background: "#fff", border: "1px solid " + C.headerBorder, boxShadow: "0 10px 30px rgba(190,150,140,0.12)" }}
         >
-          <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>ДОРОЖНАЯ КАРТА</span>
+          <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>КАРТА ПРОДВИЖЕНИЯ</span>
           <h1 className="text-2xl font-extrabold leading-tight mb-1" style={{ color: C.ink }}>Продвижение блога</h1>
           <p className="text-sm mt-3 mb-5" style={{ color: C.brownText }}>Введи почту, которую использовала при оплате курса — под ней сохранится твой прогресс.</p>
           <input
@@ -1058,6 +1205,86 @@ export default function RoadmapApp() {
     );
   }
 
+  if (materialsPage) {
+    return (
+      <div className="min-h-screen w-full" style={gridBg}>
+        <style>{FONT_IMPORT}</style>
+        <div className="max-w-2xl mx-auto px-4 pt-4 pb-10">
+          <div className="flex justify-between items-center mb-3">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                closeLesson();
+              }}
+              className="text-xs font-semibold"
+              style={{ color: C.pinkTextSoft }}
+            >
+              ← Карта продвижения
+            </a>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1 text-xs font-medium"
+              style={{ color: C.pinkTextSoft }}
+            >
+              <LogOut className="w-3.5 h-3.5" /> Сменить email
+            </button>
+          </div>
+
+          <div className="rounded-2xl p-6" style={{ background: "#fff", border: "1px solid " + C.cardBorder, boxShadow: "0 10px 30px rgba(190,150,140,0.10)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: C.pinkTextSoft }}>Дополнительные материалы</p>
+            <h1 className="text-xl font-extrabold mb-4" style={{ color: C.cardTitle }}>Дополнительные материалы</h1>
+
+            <div className="flex flex-col gap-5">
+              {MATERIALS_PAGE.map((section, si) => (
+                <div key={si}>
+                  <h2 className="text-base font-extrabold mb-2" style={{ color: C.cardTitle }}>{section.title}</h2>
+                  <div className="flex flex-col gap-3">
+                    {section.blocks.map((block, bi) => (
+                      <div key={bi} className="rounded-xl px-4 py-3" style={{ background: C.pinkPillBg }}>
+                        <p className="text-[11px] font-bold uppercase tracking-wide mb-1.5" style={{ color: C.pinkPillText }}>{block.heading}</p>
+                        <ul className="flex flex-col gap-1 text-[13px]" style={{ color: C.inkSoft }}>
+                          {block.items.map((item, ii) => {
+                            const it = typeof item === "string" ? { text: item } : item;
+                            return (
+                              <li key={ii}>
+                                {it.internalHash ? (
+                                  <a
+                                    href={"#" + it.internalHash}
+                                    className="font-semibold inline-flex items-center gap-1"
+                                    style={{ color: C.pinkPillText }}
+                                  >
+                                    → {it.text}
+                                  </a>
+                                ) : it.link ? (
+                                  <a
+                                    href={it.link.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="font-semibold inline-flex items-center gap-1"
+                                    style={{ color: C.pinkPillText }}
+                                  >
+                                    → {it.text}
+                                  </a>
+                                ) : (
+                                  <>• {it.text}</>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (promptBase) {
     return (
       <div className="min-h-screen w-full" style={gridBg}>
@@ -1073,7 +1300,7 @@ export default function RoadmapApp() {
               className="text-xs font-semibold"
               style={{ color: C.pinkTextSoft }}
             >
-              ← Дорожная карта
+              ← Карта продвижения
             </a>
             <button
               onClick={handleLogout}
@@ -1176,7 +1403,7 @@ export default function RoadmapApp() {
               className="text-xs font-semibold"
               style={{ color: C.pinkTextSoft }}
             >
-              ← Дорожная карта
+              ← Карта продвижения
             </a>
             <button
               onClick={handleLogout}
@@ -1222,7 +1449,9 @@ export default function RoadmapApp() {
               <p className="text-sm mb-4" style={{ color: C.brownText }}>{d.description}</p>
             )}
 
-            {d.videos ? (
+            {d.body ? (
+              renderBody(d.body)
+            ) : d.videos ? (
               <div className="flex flex-col gap-3 mb-5">
                 {d.videos.map((v, vi) => (
                   <div
@@ -1324,7 +1553,23 @@ export default function RoadmapApp() {
       <style>{FONT_IMPORT}</style>
       <div className="max-w-2xl mx-auto px-4 pt-4 pb-10">
 
-        <div className="flex justify-end mb-3">
+        <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
+          <div className="flex items-center gap-3">
+            <a
+              href="#promptbase"
+              className="text-xs font-semibold"
+              style={{ color: C.pinkTextSoft }}
+            >
+              📚 База промптов
+            </a>
+            <a
+              href="#materials"
+              className="text-xs font-semibold"
+              style={{ color: C.pinkTextSoft }}
+            >
+              📎 Доп. материалы
+            </a>
+          </div>
           <button
             onClick={handleLogout}
             className="flex items-center gap-1 text-xs font-medium"
@@ -1350,7 +1595,7 @@ export default function RoadmapApp() {
         </div>
 
         <div className="rounded-2xl px-6 py-7 text-center relative" style={{ background: "#fff", border: "1px solid " + C.headerBorder, boxShadow: "0 10px 30px rgba(190,150,140,0.10)" }}>
-          <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>ДОРОЖНАЯ КАРТА</span>
+          <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>КАРТА ПРОДВИЖЕНИЯ</span>
           <h1 className="text-3xl font-extrabold leading-tight" style={{ color: C.ink }}>Продвижение блога</h1>
           <div className="mt-4 inline-block font-semibold text-sm px-4 py-2 rounded-full" style={{ background: C.pinkPillBg, color: C.pinkPillText }}>
             Пройдено {completedDays} из {DAYS.length} уроков
