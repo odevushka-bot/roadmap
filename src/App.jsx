@@ -180,45 +180,128 @@ const PROMPT_BANK = `Скилл: Банк постов для блога
 — не делай пустых блоков
 — текст должен выглядеть естественно, а не как шаблон ИИ`;
 
+const PROMPT_DNA = `Ты — стратег личного бренда и контент-директор с 10-летним опытом. Я загружаю тебе заполненную анкету распаковки личности. Твоя задача — проанализировать её и создать подробный документ «ДНК блога».
+
+ИНСТРУКЦИЯ ПО АНАЛИЗУ
+
+Прочитай все ответы внимательно. Ищи:
+• Повторяющиеся слова и темы — это ядро личности
+• Эмоционально заряженные ответы — там живёт настоящая страсть
+• Противоречия и парадоксы — это уникальность
+• Конкретные истории и детали — это контент
+• Скрытые ценности между строк — не только то, что написано явно
+
+СТРУКТУРА ДОКУМЕНТА «ДНК БЛОГА»
+
+Создай документ со следующими разделами. Каждый раздел — подробный, конкретный, без общих фраз.
+
+## 1. ПОРТРЕТ ЛИЧНОСТИ (1 страница)
+- 10 слов, которые точнее всего описывают этого человека
+- 3 главные ценности с объяснением, как они проявляются в ответах
+- Ключевое противоречие личности (то, что делает его/её интересным)
+- Архетип по Юнгу/Пирсон: кто это — Мудрец, Бунтарь, Герой, Творец, Маг, Искатель, Шут, Заботливый, Правитель или Простодушный? Объясни почему.
+- Главная «суперсила» — то, что этот человек делает лучше всех
+
+## 2. ИСТОРИЯ-ПУТЬ ГЕРОЯ (1 страница)
+- Точка А: кем был/была раньше (из ответов о прошлом)
+- Переломный момент: что изменило жизнь/взгляды
+- Точка Б: кем стал/стала сейчас
+- Главный урок пути — в 1–2 предложениях
+- Готовая формулировка истории для поста «Обо мне» (150–200 слов, от первого лица)
+
+## 3. КОНЦЕПЦИЯ БЛОГА (ключевой раздел)
+- Тема блога: одно чёткое предложение «Этот блог для [кого] о [чём]»
+- УТП: чем этот блог отличается от 100 похожих (конкретно, без клише)
+- Tone of voice: как автор говорит с аудиторией (3–5 характеристик с примерами фраз)
+- Что блог НЕ будет делать — чёткие границы
+- Эмоция, которую должен вызывать блог у читателя
+
+## 4. ПОРТРЕТ АУДИТОРИИ
+- Кто этот человек (конкретный образ, не демография)
+- Главная боль/проблема аудитории
+- Главное желание/мечта аудитории
+- Что аудитория ищет у этого блогера (чего нет у других)
+- Фраза, которую читатель говорит себе, найдя этот блог
+
+## 5. РУБРИКИ И КОНТЕНТ-ПЛАН
+
+### 5.1 Постоянные рубрики (минимум 5)
+Для каждой рубрики:
+- Название
+- О чём (2–3 предложения)
+- Почему именно эта рубрика подходит этому автору
+- Пример темы первого поста
+
+### 5.2 Первые 20 тем для публикаций
+Список конкретных тем, основанных на ответах анкеты. Каждая тема — это уже готовый заголовок или идея. Распредели по рубрикам.
+
+### 5.3 Контент-микс (в процентах)
+- % личных историй
+- % экспертного контента
+- % лайфстайла
+- % взаимодействия с аудиторией
+- % другого (укажи что)
+
+## 6. ПОЗИЦИОНИРОВАНИЕ
+
+### Шапка профиля (варианты)
+Напиши 3 варианта описания профиля (до 150 символов каждый) — разные по стилю: серьёзный, дерзкий, тёплый.
+
+### Биография (варианты)
+Напиши 2 варианта развёрнутой биографии (200–250 слов) для страницы «Обо мне».
+
+### Якорные фразы
+5–7 фраз, которые могут стать подписью / слоганом блога.
+
+## 7. СИЛЬНЫЕ СТОРОНЫ И РИСКИ
+- Топ-3 сильных стороны этого блогера (конкретно, с примерами из анкеты)
+- Топ-3 риска или слабых места (честно, с рекомендациями как работать)
+- Что этому блогеру даётся легче всего в ведении блога
+- Что потребует усилий и как это преодолеть
+
+## 8. ПЛАН ЗАПУСКА (или перезапуска)
+- Шаг 1 (эта неделя): что сделать прямо сейчас
+- Шаг 2 (первый месяц): как выстроить присутствие
+- Шаг 3 (3 месяца): к чему стремиться
+- Метрики: по каким показателям понимать, что всё идёт правильно`;
+
 const DAYS = [
   {
-    n: 1, lesson: "Как создать блог", icon: "💻",
+    n: 1, lesson: "Распаковка личности", icon: "🧬",
+    description: "Заполни анкету распаковки личности, загрузи её в ИИ вместе с моим промптом — и ты получишь стратегию блога на 10-15 страниц.",
+    tasks: [
+      { text: "Заполни анкету", link: { label: "Открыть анкету", url: "tg://resolve?domain=Womans_Bloging_club_bot&start=cmd_run_4200394160" } },
+      {
+        text: "Скопируй промпт",
+        hint: `1. Загрузи анкету и промпт в любой мощный ИИ с загрузкой файлов.
+2. Прикрепи заполненную анкету — загрузи xlsx-файл или вставь текст ответов.
+3. Вставь промпт и отправь — вставь скопированный промпт после файла и нажми Enter.
+4. Получи ДНК блога — ИИ создаст подробный документ на 10-15 страниц.`,
+        prompt: PROMPT_DNA,
+        promptCaption: "Скопируй промпт и отправь его вместе с анкетой в любой мощный ИИ — он соберёт документ «ДНК блога».",
+        link: { label: "Открыть бота", url: "tg://resolve?domain=Womans_Bloging_club_bot&start=cmd_run_4200394160" },
+      },
+    ],
+  },
+  {
+    n: 2, lesson: "Как создать блог", icon: "💻",
     cover: COVER_1,
     link: "https://t.me/c/3811870554/779/1594",
     tasks: [
-      { text: "Пройди распаковку личности", link: { label: "Пройти распаковку", url: "https://t.me/Womans_Bloging_club_bot?startapp=bdb0a722f47fb2a4" } },
       { text: "Определи тему, направление и формат канала", link: { label: "Идеи для блога", url: "https://t.me/c/2834183143/4751" } },
       { text: "Составь позиционирование", link: { label: "Изучить статью о позиционировании", url: "https://telegra.ph/Pozicionirovanie-v-bloge-04-29" }, details: POS_TASK },
       { text: "Создай канал", link: { label: "Как создать канал", url: "https://t.me/c/3811870554/16/515" } },
       { text: "Отключи нежелательные реакции", link: { label: "Как отключить реакции", url: "https://t.me/c/3811870554/16/522" } },
       { text: "Включи комментарии к каналу (по желанию)", link: { label: "Как включить комментарии", url: "https://t.me/c/3811870554/16/516" } },
-      { text: "Составь банк идей для постов", prompt: PROMPT_BANK },
+      { text: "Составь банк идей для постов", prompt: PROMPT_BANK, promptCaption: "Скопируй промпт и отправь его нейросети (ChatGPT или Claude) — она соберёт банк идей под твою нишу." },
     ],
   },
   {
-    n: 2, lesson: "Упаковка блога", icon: "🎯", cover: COVER_2, link: "https://t.me/c/3811870554/779/1606",
+    n: 3, lesson: "Упаковка и позиционирование", icon: "🎯", cover: COVER_2, link: "https://t.me/c/3811870554/779/1606",
     tasks: [
-      {
-        text: "Выбери название",
-        links: [
-          { label: "Как упаковать блог в Telegram, Max", url: "https://t.me/c/2834183143/4762" },
-          { label: "Как упаковать блог в ВК", url: "https://t.me/c/2834183143/4770" },
-        ],
-      },
-      {
-        text: "Оформи аватарку",
-        links: [
-          { label: "Как упаковать блог в Telegram, Max", url: "https://t.me/c/2834183143/4762" },
-          { label: "Как упаковать блог в ВК", url: "https://t.me/c/2834183143/4770" },
-        ],
-      },
-      {
-        text: "Создай описание",
-        links: [
-          { label: "Как упаковать блог в Telegram, Max", url: "https://t.me/c/2834183143/4762" },
-          { label: "Как упаковать блог в ВК", url: "https://t.me/c/2834183143/4770" },
-        ],
-      },
+      "Выбери название",
+      "Оформи аватарку",
+      "Создай описание",
       { text: "Создай пост-навигацию / приветствие и закрепи его", link: { label: "Что писать в закреплённом сообщении", url: "https://t.me/c/3811870554/16/521" } },
       {
         text: "Создай лид-магнит и выложи его на канале (по желанию)",
@@ -230,9 +313,13 @@ const DAYS = [
         link: { label: "Инструкция: пост с синей кнопкой и лид-магнитом", url: "https://t.me/c/2834183143/4773" },
       },
     ],
+    extras: [
+      { label: "Как упаковать блог в Telegram, Max", url: "https://t.me/c/2834183143/4762" },
+      { label: "Как упаковать блог в ВК", url: "https://t.me/c/2834183143/4770" },
+    ],
   },
   {
-    n: 3, lesson: "Как писать посты", icon: "✏️", cover: COVER_3, link: "https://t.me/c/3811870554/779/1623",
+    n: 4, lesson: "Как писать посты", icon: "✏️", cover: COVER_3, link: "https://t.me/c/3811870554/779/1623",
     tasks: [
       { text: "Изучи файлы-шпаргалки по написанию постов", link: { label: "Файлы-шпаргалки", url: "https://t.me/c/2834183143/4779" } },
       "Напиши свой первый пост",
@@ -254,34 +341,71 @@ const DAYS = [
       "Опубликуй пост",
     ],
     note: "Присылай посты в чат 💬 — наше комьюнити засыплет тебя лайками и комментами!",
+    dividerAfter: "🚀 Подготовка аккаунта к продвижению",
   },
   {
-    n: 4, lesson: "Начинаем продвижение", icon: "📣", link: "https://t.me/c/3811870554/2/848",
+    n: 5, lesson: "Как создать аккаунт в Pinterest и переключиться на бизнес профиль", icon: "📌",
+    description: "Прежде чем регистрироваться — разберёмся, что такое Pinterest и как работают его алгоритмы.",
+    link: "https://t.me/c/3811870554/2/848",
     tasks: [
-      "Зарегистрируйся в Pinterest",
-      { text: "Оформи профиль", link: { label: "Как оформить профиль", url: "https://t.me/c/3811870554/2/854" } },
+      { text: "Зарегистрируйся в Pinterest", link: { label: "Как зарегистрироваться", url: "https://t.me/c/3811870554/2/848" } },
       "Переключись на бизнес-аккаунт",
-      { text: "Добавь ссылку на блог", link: { label: "Как добавить ссылку на блог", url: "https://t.me/c/3811870554/2/887" } },
     ],
     note: "Не спеши переходить к следующему дню, пока не выполнишь задания.",
   },
-  { n: 5, lesson: "Создание первых пинов", icon: "🖼️", tasks: ["Выбери тему для пина", "Создай 3 пина по уроку", "Сохрани дизайны", "Подготовь описание и заголовки"] },
-  { n: 6, lesson: "Оформление шаблонов", icon: "🔲", tasks: ["Выбери стиль оформления", "Создай 2–3 шаблона пинов", "Сохрани в Canva", "Подготовь обложки для постов"], note: "Лучше 30 минут каждый день, чем один день раз в месяц." },
-  { n: 7, lesson: "Создание первых 10 пинов", icon: "⭐", tasks: ["Создай 10 пинов", "Заполни описания (SEO)", "Проверь ключевые слова", "Сохрани и подготовь к публикации"] },
-  { n: 8, lesson: "SEO Pinterest", icon: "🔍", tasks: ["Собери ключевые слова", "Оптимизируй описания пинов", "Добавь ключевые слова в доски", "Проверь SEO профиля"] },
-  { n: 9, lesson: "Создание досок", icon: "📁", tasks: ["Создай тематические доски", "Оформи обложки досок", "Напиши описания досок", "Добавь первые пины"] },
-  { n: 10, lesson: "Публикация первых пинов", icon: "📤", tasks: ["Опубликуй 5–10 пинов", "Размести их в нужные доски", "Проверь ссылки и описания", "Настрой регулярность публикаций"], note: "Отмечай выполненные задания — так ты увидишь свой прогресс." },
-  { n: 11, lesson: "Анализ статистики", icon: "📊", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 12, lesson: "Как делать вирусные пины", icon: "🔥", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 13, lesson: "Создание контент-плана", icon: "🗓️", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 14, lesson: "Автоматизация работы", icon: "⚙️", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 15, lesson: "Продвижение Telegram", icon: "💬", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 16, lesson: "Лид-магнит", icon: "🧲", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 17, lesson: "Продающие посты", icon: "💳", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 18, lesson: "Воронка продаж", icon: "⏳", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 19, lesson: "Как удерживать подписчиков", icon: "👥", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 20, lesson: "Разбор ошибок", icon: "🧩", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
-  { n: 21, lesson: "Финальный чек-лист", icon: "🎉", final: true, tasks: ["Блог оформлен", "Pinterest настроен", "Опубликованы пины", "Есть первые переходы", "Есть контент-план", "Всё готово к масштабированию"] },
+  {
+    n: 6, lesson: "Что такое ключевые слова и как их искать", icon: "🔑",
+    link: "https://t.me/c/3811870554/2/849",
+    tasks: [
+      { text: "Найди ключевые слова в самом Pinterest", link: { label: "Как искать ключевые слова", url: "https://t.me/c/3811870554/2/850" } },
+      "Составь список ключевых слов по своей нише на 500 знаков",
+    ],
+    materials: [
+      { label: "Готовые списки ключевых слов по нишам", url: "https://t.me/c/3811870554/17/404" },
+    ],
+  },
+  {
+    n: 7, lesson: "Упаковка профиля в Pinterest", icon: "🪞",
+    link: "https://t.me/c/3811870554/2/854",
+    tasks: [
+      { text: "Оформи профиль", link: { label: "Как оформить профиль", url: "https://t.me/c/3811870554/2/854" } },
+      { text: "Загрузи обложку профиля", link: { label: "Как загрузить обложку", url: "https://t.me/c/3811870554/2/857" } },
+      { text: "Создай реферальную ссылку", link: { label: "Как добавить ссылку на блог", url: "https://t.me/c/3811870554/2/887" } },
+    ],
+    materials: [
+      { label: "Готовые шаблоны для Шапки профиля", url: "https://t.me/c/3811870554/2/885" },
+    ],
+  },
+  {
+    n: 8, lesson: "Доски на Pinterest", icon: "📁",
+    link: "https://t.me/c/3811870554/2/885",
+    tasks: [
+      "Создай тематические доски",
+      "Оформи обложки досок",
+      { text: "Напиши описания досок", hint: "Добавь ключевые слова в каждую доску" },
+      { text: "Добавь обложки к доскам", hint: "Выложи обложку к доскам как отдельные пины. Потом добавь эти пины на эти доски. Зайди в редактирование доски и установи эти пины как обложки." },
+    ],
+    materials: [
+      { label: "Как работать с досками", url: "https://t.me/c/3811870554/2/894" },
+    ],
+    dividerAfter: "🚀 Начинаем продвижение",
+  },
+  { n: 9, lesson: "Создание первых пинов", icon: "🖼️", tasks: ["Выбери тему для пина", "Создай 3 пина по уроку", "Сохрани дизайны", "Подготовь описание и заголовки"] },
+  { n: 10, lesson: "Оформление шаблонов", icon: "🔲", tasks: ["Выбери стиль оформления", "Создай 2–3 шаблона пинов", "Сохрани в Canva", "Подготовь обложки для постов"], note: "Лучше 30 минут каждый день, чем один день раз в месяц." },
+  { n: 11, lesson: "Создание первых 10 пинов", icon: "⭐", tasks: ["Создай 10 пинов", "Заполни описания (SEO)", "Проверь ключевые слова", "Сохрани и подготовь к публикации"] },
+  { n: 12, lesson: "SEO Pinterest", icon: "🔍", tasks: ["Собери ключевые слова", "Оптимизируй описания пинов", "Добавь ключевые слова в доски", "Проверь SEO профиля"] },
+  { n: 13, lesson: "Публикация первых пинов", icon: "📤", tasks: ["Опубликуй 5–10 пинов", "Размести их в нужные доски", "Проверь ссылки и описания", "Настрой регулярность публикаций"], note: "Отмечай выполненные задания — так ты увидишь свой прогресс." },
+  { n: 14, lesson: "Анализ статистики", icon: "📊", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 15, lesson: "Как делать вирусные пины", icon: "🔥", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 16, lesson: "Создание контент-плана", icon: "🗓️", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 17, lesson: "Автоматизация работы", icon: "⚙️", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 18, lesson: "Продвижение Telegram", icon: "💬", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 19, lesson: "Лид-магнит", icon: "🧲", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 20, lesson: "Продающие посты", icon: "💳", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 21, lesson: "Воронка продаж", icon: "⏳", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 22, lesson: "Как удерживать подписчиков", icon: "👥", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 23, lesson: "Разбор ошибок", icon: "🧩", tasks: ["задание 1", "задание 2", "задание 3", "задание 4"], placeholder: true },
+  { n: 24, lesson: "Финальный чек-лист", icon: "🎉", final: true, tasks: ["Блог оформлен", "Pinterest настроен", "Опубликованы пины", "Есть первые переходы", "Есть контент-план", "Всё готово к масштабированию"] },
 ];
 
 function normalizeEmail(raw) {
@@ -289,6 +413,11 @@ function normalizeEmail(raw) {
 }
 function isValidEmail(raw) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw);
+}
+
+function getHashLessonN() {
+  const m = window.location.hash.match(/^#lesson-(\d+)/);
+  return m ? Number(m[1]) : null;
 }
 
 export default function RoadmapApp() {
@@ -302,6 +431,21 @@ export default function RoadmapApp() {
   const [booting, setBooting] = useState(true);
   const [openTask, setOpenTask] = useState(null);
   const [copiedTask, setCopiedTask] = useState(null);
+  const [lessonN, setLessonN] = useState(() => getHashLessonN());
+
+  useEffect(() => {
+    const onHashChange = () => setLessonN(getHashLessonN());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const openLesson = (n) => {
+    window.location.hash = "lesson-" + n;
+  };
+  const closeLesson = () => {
+    window.location.hash = "";
+    setLessonN(null);
+  };
 
   useEffect(() => {
     (async () => {
@@ -415,7 +559,163 @@ export default function RoadmapApp() {
     const arr = progress[d.n];
     return arr ? arr.filter(Boolean).length === d.tasks.length && d.tasks.length > 0 : false;
   };
+  const dayDoneCount = (d) => {
+    const arr = progress[d.n];
+    return arr ? arr.filter(Boolean).length : 0;
+  };
   const completedDays = DAYS.filter(dayDone).length;
+
+  const renderTasks = (d) => (
+    <div className="space-y-1">
+      {d.tasks.map((rawTask, idx) => {
+        const t = typeof rawTask === "string" ? { text: rawTask } : rawTask;
+        const checked = !!(progress[d.n] && progress[d.n][idx]);
+        const taskKey = d.n + ":" + idx;
+        const isOpen = openTask === taskKey;
+        const hasExpand = !!(t.details || t.prompt || t.hint);
+        return (
+          <div key={idx} className="py-1">
+            <label
+              className="flex items-start gap-2 text-[13.5px] cursor-pointer select-none"
+              style={{ color: d.placeholder ? C.placeholderText : C.inkSoft, fontStyle: d.placeholder ? "italic" : "normal" }}
+            >
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={() => toggleTask(d.n, idx)}
+                className="mt-0.5 w-3.5 h-3.5 shrink-0"
+                style={{ accentColor: C.checkboxAccent }}
+              />
+              <span style={{ textDecoration: checked ? "line-through" : "none", opacity: checked ? 0.6 : 1 }}>{t.text}</span>
+            </label>
+            {(t.link || t.links || t.file || hasExpand) && (
+              <div className="ml-[22px] mt-0.5 flex flex-col items-start gap-1">
+                {(t.links || (t.link ? [t.link] : [])).map((lnk, li) => (
+                  <a
+                    key={li}
+                    href={lnk.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[12px] font-semibold"
+                    style={{ color: C.pinkPillText }}
+                  >
+                    → {lnk.label}
+                  </a>
+                ))}
+                {t.file && (
+                  <a
+                    href={t.file.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[12px] font-semibold"
+                    style={{ color: C.pinkPillText }}
+                  >
+                    📎 {t.file.label}
+                  </a>
+                )}
+                {hasExpand && (
+                  <button
+                    type="button"
+                    onClick={() => setOpenTask(isOpen ? null : taskKey)}
+                    className="text-[12px] font-semibold"
+                    style={{ color: t.hint ? C.badgeFinalText : C.pinkPillText }}
+                  >
+                    {t.hint
+                      ? (isOpen ? "💡 Скрыть подсказку ↑" : "💡 Подсказка ↓")
+                      : (isOpen ? "Скрыть задание ↑" : "Открыть задание ↓")}
+                  </button>
+                )}
+                {isOpen && t.hint && (
+                  <div
+                    className="w-full rounded-xl px-4 py-3 text-[12.5px]"
+                    style={{ background: C.badgeFinalBg, border: "1px solid " + C.badgeFinalBorder, color: C.inkSoft, whiteSpace: "pre-line", lineHeight: 1.5 }}
+                  >
+                    {t.hint}
+                  </div>
+                )}
+                {isOpen && t.details && (
+                  <div
+                    className="w-full rounded-xl px-4 py-3 text-[12.5px]"
+                    style={{ background: C.pinkPillBg, color: C.inkSoft, whiteSpace: "pre-line", lineHeight: 1.5 }}
+                  >
+                    {t.details}
+                  </div>
+                )}
+                {isOpen && t.prompt && (
+                  <div
+                    className="w-full rounded-xl px-4 py-3"
+                    style={{ background: C.pinkPillBg, color: C.inkSoft }}
+                  >
+                    <p className="text-[12px] mb-2" style={{ color: C.pinkPillText }}>
+                      {t.promptCaption || "Скопируй промпт и отправь его нейросети (ChatGPT или Claude)."}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => copyTaskText(t.prompt, taskKey)}
+                      className="text-[12px] font-semibold px-3 py-1.5 rounded-lg mb-2"
+                      style={{ background: copiedTask === taskKey ? C.badgeDoneBg : C.btnBg, color: copiedTask === taskKey ? C.badgeDoneText : "#fff" }}
+                    >
+                      {copiedTask === taskKey ? "Скопировано ✓" : "Скопировать промпт"}
+                    </button>
+                    <pre
+                      className="text-[11.5px] rounded-lg px-3 py-2 max-h-48 overflow-y-auto"
+                      style={{ background: "#fff", color: C.inkSoft, whiteSpace: "pre-wrap", lineHeight: 1.45 }}
+                    >
+                      {t.prompt}
+                    </pre>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const renderCover = (d) => {
+    if (d.cover) {
+      return d.link ? (
+        <a href={d.link} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="block relative rounded-xl overflow-hidden group" style={{ aspectRatio: "16/10" }}>
+          <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 transition" style={{ background: "rgba(0,0,0,0.12)" }} />
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.92)" }}>
+              <Play className="w-4 h-4 ml-0.5" style={{ color: C.playIcon }} fill="currentColor" />
+            </span>
+          </span>
+        </a>
+      ) : (
+        <div className="block relative rounded-xl overflow-hidden" style={{ aspectRatio: "16/10" }}>
+          <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
+        </div>
+      );
+    }
+    if (d.link) {
+      return (
+        <a
+          href={d.link}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="rounded-xl h-20 flex flex-col items-center justify-center"
+          style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}
+        >
+          <span className="text-xl">{d.icon}</span>
+          <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
+          <span className="text-[10px] font-semibold mt-1 inline-flex items-center gap-1">
+            <Play className="w-2.5 h-2.5" fill="currentColor" /> Смотреть урок
+          </span>
+        </a>
+      );
+    }
+    return (
+      <div className="rounded-xl h-20 flex flex-col items-center justify-center" style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}>
+        <span className="text-xl">{d.icon}</span>
+        <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
+      </div>
+    );
+  };
 
   if (booting) {
     return (
@@ -435,7 +735,7 @@ export default function RoadmapApp() {
           style={{ background: "#fff", border: "1px solid " + C.headerBorder, boxShadow: "0 10px 30px rgba(190,150,140,0.12)" }}
         >
           <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>ДОРОЖНАЯ КАРТА</span>
-          <h1 className="text-2xl font-extrabold leading-tight mb-1" style={{ color: C.ink }}>Продвижение блога<br />за 21 день</h1>
+          <h1 className="text-2xl font-extrabold leading-tight mb-1" style={{ color: C.ink }}>Продвижение блога</h1>
           <p className="text-sm mt-3 mb-5" style={{ color: C.brownText }}>Введи почту, которую использовала при оплате курса — под ней сохранится твой прогресс.</p>
           <input
             type="email"
@@ -468,6 +768,141 @@ export default function RoadmapApp() {
     );
   }
 
+  const activeDay = lessonN != null ? DAYS.find((d) => d.n === lessonN) : null;
+
+  if (activeDay) {
+    const d = activeDay;
+    const idx = DAYS.findIndex((x) => x.n === d.n);
+    const prevDay = DAYS[idx - 1];
+    const nextDay = DAYS[idx + 1];
+    const done = dayDone(d);
+    const badgeBg = done ? C.badgeDoneBg : d.final ? C.badgeFinalBg : C.badgeBg;
+    const badgeBorder = done ? C.badgeDoneBorder : d.final ? C.badgeFinalBorder : C.badgeBorder;
+    const badgeText = done ? C.badgeDoneText : d.final ? C.badgeFinalText : C.badgeText;
+
+    return (
+      <div className="min-h-screen w-full" style={gridBg}>
+        <style>{FONT_IMPORT}</style>
+        <div className="max-w-2xl mx-auto px-4 pt-4 pb-10">
+          <div className="flex justify-between items-center mb-3">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                closeLesson();
+              }}
+              className="text-xs font-semibold"
+              style={{ color: C.pinkTextSoft }}
+            >
+              ← Дорожная карта
+            </a>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1 text-xs font-medium"
+              style={{ color: C.pinkTextSoft }}
+            >
+              <LogOut className="w-3.5 h-3.5" /> Сменить email
+            </button>
+          </div>
+
+          <div
+            className="rounded-2xl p-6 relative"
+            style={{
+              background: d.final ? "linear-gradient(135deg,#fff8ec,#fff)" : "#fff",
+              border: "1px solid " + (d.final ? C.finalCardBorder : C.cardBorder),
+              boxShadow: "0 10px 30px rgba(190,150,140,0.10)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div
+                className="w-12 h-12 shrink-0 rounded-full flex flex-col items-center justify-center"
+                style={{ background: badgeBg, border: "2px solid " + badgeBorder, color: badgeText }}
+              >
+                {done ? <Check className="w-5 h-5" /> : (
+                  <>
+                    <span className="text-[8px] font-bold leading-none">Урок</span>
+                    <span className="text-base font-extrabold leading-none">{d.n}</span>
+                  </>
+                )}
+              </div>
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: C.pinkTextSoft }}>
+                  Урок {d.n} из {DAYS.length}
+                  {d.placeholder && <span className="italic font-medium normal-case ml-2" style={{ color: C.placeholderTag }}>заглушка — заполним позже</span>}
+                </p>
+                <h1 className="text-xl font-extrabold" style={{ color: C.cardTitle }}>{d.lesson}</h1>
+              </div>
+            </div>
+
+            {d.description && (
+              <p className="text-sm mb-4" style={{ color: C.brownText }}>{d.description}</p>
+            )}
+
+            <div className="max-w-xs mb-5">{renderCover(d)}</div>
+
+            <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.pinkTextSoft }}>Задания к этому уроку:</p>
+            {renderTasks(d)}
+
+            {d.extras && (
+              <div className="mt-3 flex flex-col gap-1">
+                {d.extras.map((ex, exi) => (
+                  <a
+                    key={exi}
+                    href={ex.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[12px] font-semibold inline-flex items-center gap-1 w-fit"
+                    style={{ color: C.pinkPillText }}
+                  >
+                    → {ex.label}
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {d.materials && (
+              <div className="mt-4 rounded-xl px-4 py-3" style={{ background: C.pinkPillBg, border: "1px solid " + C.badgeBorder }}>
+                <p className="text-[11px] font-bold uppercase tracking-wide mb-1.5" style={{ color: C.pinkPillText }}>📚 Доп материалы:</p>
+                <div className="flex flex-col gap-1">
+                  {d.materials.map((mat, mi) => (
+                    <a
+                      key={mi}
+                      href={mat.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[12px] font-semibold inline-flex items-center gap-1 w-fit"
+                      style={{ color: C.pinkPillText }}
+                    >
+                      → {mat.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {d.note && (
+              <div
+                className="mt-4 w-fit max-w-[280px] rounded-lg px-4 py-2"
+                style={{ ...hand, background: C.stickyBg, color: C.stickyText, fontSize: "17px", lineHeight: 1.25, transform: "rotate(-1.5deg)", boxShadow: "0 2px 6px rgba(0,0,0,0.06)" }}
+              >
+                {d.note}
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-between items-start gap-3 mt-4 text-[13px] font-semibold" style={{ color: C.pinkPillText }}>
+            {prevDay ? (
+              <a href={"#lesson-" + prevDay.n} className="max-w-[45%]">← Урок {prevDay.n}: {prevDay.lesson}</a>
+            ) : <span />}
+            {nextDay ? (
+              <a href={"#lesson-" + nextDay.n} className="max-w-[45%] text-right">Урок {nextDay.n}: {nextDay.lesson} →</a>
+            ) : <span />}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen w-full" style={gridBg}>
       <style>{FONT_IMPORT}</style>
@@ -488,7 +923,7 @@ export default function RoadmapApp() {
             className="rounded px-3 py-2 max-w-[220px] text-center"
             style={{ ...hand, background: C.stickyBg, color: C.stickyText, fontSize: "17px", lineHeight: 1.25, transform: "rotate(-3deg)", boxShadow: "2px 4px 10px rgba(0,0,0,0.08)" }}
           >
-            21 день маленьких шагов приведут тебя к большому результату!
+            Маленькие шаги каждый день приведут тебя к большому результату!
           </div>
           <div
             className="rounded-2xl px-4 py-2 max-w-[220px] text-center"
@@ -500,9 +935,9 @@ export default function RoadmapApp() {
 
         <div className="rounded-2xl px-6 py-7 text-center relative" style={{ background: "#fff", border: "1px solid " + C.headerBorder, boxShadow: "0 10px 30px rgba(190,150,140,0.10)" }}>
           <span className="inline-block font-extrabold text-xs mb-2" style={{ color: C.pinkText, letterSpacing: "3px" }}>ДОРОЖНАЯ КАРТА</span>
-          <h1 className="text-3xl font-extrabold leading-tight" style={{ color: C.ink }}>Продвижение блога<br />за 21 день</h1>
+          <h1 className="text-3xl font-extrabold leading-tight" style={{ color: C.ink }}>Продвижение блога</h1>
           <div className="mt-4 inline-block font-semibold text-sm px-4 py-2 rounded-full" style={{ background: C.pinkPillBg, color: C.pinkPillText }}>
-            Пройдено {completedDays} из {DAYS.length} дней
+            Пройдено {completedDays} из {DAYS.length} уроков
           </div>
           <div className="mt-4 h-2 rounded-full overflow-hidden max-w-xs mx-auto" style={{ background: C.progressTrack }}>
             <div className="h-full transition-all duration-500" style={{ width: (completedDays / DAYS.length) * 100 + "%", background: C.progressFill }} />
@@ -518,6 +953,7 @@ export default function RoadmapApp() {
             const badgeBg = done ? C.badgeDoneBg : d.final ? C.badgeFinalBg : C.badgeBg;
             const badgeBorder = done ? C.badgeDoneBorder : d.final ? C.badgeFinalBorder : C.badgeBorder;
             const badgeText = done ? C.badgeDoneText : d.final ? C.badgeFinalText : C.badgeText;
+            const doneCount = dayDoneCount(d);
 
             return (
               <div key={d.n}>
@@ -529,7 +965,7 @@ export default function RoadmapApp() {
                     >
                       {done ? <Check className="w-5 h-5" /> : (
                         <>
-                          <span className="text-[9px] font-bold leading-none">День</span>
+                          <span className="text-[9px] font-bold leading-none">Урок</span>
                           <span className="text-lg font-extrabold leading-none">{d.n}</span>
                         </>
                       )}
@@ -547,7 +983,16 @@ export default function RoadmapApp() {
                   </div>
 
                   <div
-                    className="flex-1 mb-6 relative rounded-2xl p-5 grid sm:grid-cols-2 gap-5"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => openLesson(d.n)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openLesson(d.n);
+                      }
+                    }}
+                    className="flex-1 mb-6 relative rounded-2xl p-5 flex gap-4 items-center cursor-pointer"
                     style={{
                       background: d.final ? "linear-gradient(135deg,#fff8ec,#fff)" : "#fff",
                       border: "1px solid " + (d.final ? C.finalCardBorder : C.cardBorder),
@@ -555,195 +1000,32 @@ export default function RoadmapApp() {
                     }}
                   >
                     <span className="block absolute -top-3 right-6 text-lg" style={{ transform: "rotate(12deg)" }}>📎</span>
-                    <div>
-                      <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.pinkTextSoft }}>Изучи урок:</p>
-                      <h3 className="text-base font-extrabold mb-3" style={{ color: C.cardTitle }}>{d.lesson}</h3>
-                      {d.cover ? (
-                        d.link ? (
-                          <a href={d.link} target="_blank" rel="noreferrer" className="block relative rounded-xl overflow-hidden group" style={{ aspectRatio: "16/10" }}>
-                            <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 transition" style={{ background: "rgba(0,0,0,0.12)" }} />
-                            <span className="absolute inset-0 flex items-center justify-center">
-                              <span className="w-11 h-11 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.92)" }}>
-                                <Play className="w-4 h-4 ml-0.5" style={{ color: C.playIcon }} fill="currentColor" />
-                              </span>
-                            </span>
-                          </a>
+                    <div className="w-24 sm:w-28 shrink-0">{renderCover(d)}</div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-extrabold mb-1" style={{ color: C.cardTitle }}>{d.lesson}</h3>
+                      <p className="text-[12px] mb-2" style={{ color: C.brownText }}>
+                        {d.placeholder ? (
+                          <span className="italic" style={{ color: C.placeholderTag }}>заглушка — заполним позже</span>
                         ) : (
-                          <div className="block relative rounded-xl overflow-hidden" style={{ aspectRatio: "16/10" }}>
-                            <img src={d.cover} alt={d.lesson} className="w-full h-full object-cover" />
-                          </div>
-                        )
-                      ) : d.link ? (
-                        <a
-                          href={d.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="rounded-xl h-20 flex flex-col items-center justify-center"
-                          style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}
-                        >
-                          <span className="text-xl">{d.icon}</span>
-                          <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
-                          <span className="text-[10px] font-semibold mt-1 inline-flex items-center gap-1">
-                            <Play className="w-2.5 h-2.5" fill="currentColor" /> Смотреть урок
-                          </span>
-                        </a>
-                      ) : (
-                        <div className="rounded-xl h-20 flex flex-col items-center justify-center" style={{ background: "linear-gradient(135deg," + C.thumbGradFrom + "," + C.thumbGradTo + ")", color: C.thumbText }}>
-                          <span className="text-xl">{d.icon}</span>
-                          <span className="text-[10px] font-extrabold tracking-wide mt-1 text-center px-2">{d.lesson.toUpperCase()}</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="text-[11px] font-bold uppercase tracking-wide mb-1 flex items-center gap-2 flex-wrap" style={{ color: C.pinkTextSoft }}>
-                        Задания на сегодня:
-                        {d.placeholder && <span className="italic font-medium normal-case text-[10px]" style={{ color: C.placeholderTag }}>заглушка — заполним позже</span>}
+                          <>{doneCount} из {d.tasks.length} заданий выполнено</>
+                        )}
                       </p>
-                      <div className="space-y-1">
-                        {d.tasks.map((rawTask, idx) => {
-                          const t = typeof rawTask === "string" ? { text: rawTask } : rawTask;
-                          const checked = !!(progress[d.n] && progress[d.n][idx]);
-                          const taskKey = d.n + ":" + idx;
-                          const isOpen = openTask === taskKey;
-                          const hasExpand = !!(t.details || t.prompt || t.hint);
-                          return (
-                            <div key={idx} className="py-1">
-                              <label
-                                className="flex items-start gap-2 text-[13.5px] cursor-pointer select-none"
-                                style={{ color: d.placeholder ? C.placeholderText : C.inkSoft, fontStyle: d.placeholder ? "italic" : "normal" }}
-                              >
-                                <input
-                                  type="checkbox"
-                                  checked={checked}
-                                  onChange={() => toggleTask(d.n, idx)}
-                                  className="mt-0.5 w-3.5 h-3.5 shrink-0"
-                                  style={{ accentColor: C.checkboxAccent }}
-                                />
-                                <span style={{ textDecoration: checked ? "line-through" : "none", opacity: checked ? 0.6 : 1 }}>{t.text}</span>
-                              </label>
-                              {(t.link || t.links || t.file || hasExpand) && (
-                                <div className="ml-[22px] mt-0.5 flex flex-col items-start gap-1">
-                                  {(t.links || (t.link ? [t.link] : [])).map((lnk, li) => (
-                                    <a
-                                      key={li}
-                                      href={lnk.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-[12px] font-semibold"
-                                      style={{ color: C.pinkPillText }}
-                                    >
-                                      → {lnk.label}
-                                    </a>
-                                  ))}
-                                  {t.file && (
-                                    <a
-                                      href={t.file.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-[12px] font-semibold"
-                                      style={{ color: C.pinkPillText }}
-                                    >
-                                      📎 {t.file.label}
-                                    </a>
-                                  )}
-                                  {hasExpand && (
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenTask(isOpen ? null : taskKey)}
-                                      className="text-[12px] font-semibold"
-                                      style={{ color: t.hint ? C.badgeFinalText : C.pinkPillText }}
-                                    >
-                                      {t.hint
-                                        ? (isOpen ? "💡 Скрыть подсказку ↑" : "💡 Подсказка ↓")
-                                        : (isOpen ? "Скрыть задание ↑" : "Открыть задание ↓")}
-                                    </button>
-                                  )}
-                                  {isOpen && t.hint && (
-                                    <div
-                                      className="w-full rounded-xl px-4 py-3 text-[12.5px]"
-                                      style={{ background: C.badgeFinalBg, border: "1px solid " + C.badgeFinalBorder, color: C.inkSoft, whiteSpace: "pre-line", lineHeight: 1.5 }}
-                                    >
-                                      {t.hint}
-                                    </div>
-                                  )}
-                                  {isOpen && t.details && (
-                                    <div
-                                      className="w-full rounded-xl px-4 py-3 text-[12.5px]"
-                                      style={{ background: C.pinkPillBg, color: C.inkSoft, whiteSpace: "pre-line", lineHeight: 1.5 }}
-                                    >
-                                      {t.details}
-                                    </div>
-                                  )}
-                                  {isOpen && t.prompt && (
-                                    <div
-                                      className="w-full rounded-xl px-4 py-3"
-                                      style={{ background: C.pinkPillBg, color: C.inkSoft }}
-                                    >
-                                      <p className="text-[12px] mb-2" style={{ color: C.pinkPillText }}>
-                                        Скопируй промпт и отправь его нейросети (ChatGPT или Claude) — она соберёт банк идей под твою нишу.
-                                      </p>
-                                      <button
-                                        type="button"
-                                        onClick={() => copyTaskText(t.prompt, taskKey)}
-                                        className="text-[12px] font-semibold px-3 py-1.5 rounded-lg mb-2"
-                                        style={{ background: copiedTask === taskKey ? C.badgeDoneBg : C.btnBg, color: copiedTask === taskKey ? C.badgeDoneText : "#fff" }}
-                                      >
-                                        {copiedTask === taskKey ? "Скопировано ✓" : "Скопировать промпт"}
-                                      </button>
-                                      <pre
-                                        className="text-[11.5px] rounded-lg px-3 py-2 max-h-48 overflow-y-auto"
-                                        style={{ background: "#fff", color: C.inkSoft, whiteSpace: "pre-wrap", lineHeight: 1.45 }}
-                                      >
-                                        {t.prompt}
-                                      </pre>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {d.extras && (
-                        <div className="mt-3 flex flex-col gap-1">
-                          {d.extras.map((ex, exi) => (
-                            <a
-                              key={exi}
-                              href={ex.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="text-[12px] font-semibold inline-flex items-center gap-1 w-fit"
-                              style={{ color: C.pinkPillText }}
-                            >
-                              → {ex.label}
-                            </a>
-                          ))}
-                        </div>
-                      )}
+                      <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold" style={{ color: C.pinkPillText }}>
+                        Открыть урок →
+                      </span>
                     </div>
-
-                    {d.note && (
-                      <div
-                        className="sm:col-span-2 -mb-1 w-fit max-w-[260px] rounded-lg px-4 py-2"
-                        style={{ ...hand, background: C.stickyBg, color: C.stickyText, fontSize: "17px", lineHeight: 1.25, transform: "rotate(-1.5deg)", boxShadow: "0 2px 6px rgba(0,0,0,0.06)" }}
-                      >
-                        {d.note}
-                      </div>
-                    )}
                   </div>
                 </div>
 
-                {d.n === 3 && (
+                {d.dividerAfter && (
                   <div className="flex items-center gap-3 my-2 ml-[72px]">
                     <div className="flex-1 h-px" style={{ background: C.dashLine }} />
                     <div
                       className="flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap"
                       style={{ background: C.pinkPillText, color: "#fff" }}
                     >
-                      🚀 Дальше — продвижение блога
+                      {d.dividerAfter}
                     </div>
                     <div className="flex-1 h-px" style={{ background: C.dashLine }} />
                   </div>
@@ -754,7 +1036,7 @@ export default function RoadmapApp() {
         </div>
 
         <p className="text-center mt-2" style={{ ...hand, color: C.pinkTextSoft, fontSize: "22px" }}>
-          ✦ Через 21 день у тебя будет полностью готовая система продвижения ✦
+          ✦ У тебя будет полностью готовая система продвижения ✦
         </p>
       </div>
     </div>
