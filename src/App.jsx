@@ -544,6 +544,7 @@ const DAYS = [
   {
     n: 1, lesson: "Распаковка личности", icon: "🧬",
     special: "Бонусный урок", specialIcon: "🎁",
+    cover: "./images/bonus-cover.png",
     description: "Заполни анкету распаковки личности, загрузи её в ИИ вместе с моим промптом — и ты получишь стратегию блога на 10-15 страниц.",
     tasks: [
       { text: "Заполни анкету", link: { label: "Открыть анкету", url: "tg://resolve?domain=Womans_Bloging_club_bot&start=cmd_run_4200394160" } },
@@ -665,6 +666,7 @@ const DAYS = [
       { type: "heading", text: "Завершаем упаковку профиля" },
       { type: "p", text: "Доски - это как «папки», которые объединяют пины по какому-то признаку и дают дополнительный буст ко всем пинам." },
       { type: "p", text: "У каждой доски есть свое название и описание. Сюда мы также в вставляем ключевые слова." },
+      { type: "image", src: "./images/boards-example.png" },
       { type: "p", text: "Алгоритмы пинтерест смотрят на ключевые слова на доске, к которой прикреплен пин." },
       { type: "p", text: "Если доски упакованы правильно – пины продвигаются лучше и имеют больше просмотров." },
       { type: "p", text: "Также, пины на пинтерест продвигаются ПАЧКАМИ, по своим доскам. То есть, когда пользователь нажимает на ваш пин – рядом ему покажут другие ваши пины из этой же доски." },
@@ -673,6 +675,10 @@ const DAYS = [
       { type: "p", text: "Доска с разбором матрицы судьбы на тему «деньги» - все варианты чисел и толкований в одном месте." },
       { type: "heading", text: "Задание" },
       { type: "p", text: "Изучите информацию на карточках и создайте 2-4 доски по вашим ключевым темам." },
+      {
+        type: "carousel",
+        images: ["./images/boards-carousel-1.png", "./images/boards-carousel-2.png", "./images/boards-carousel-3.png"],
+      },
       { type: "heading", text: "Описание доски" },
       {
         type: "list",
@@ -1147,6 +1153,31 @@ export default function RoadmapApp() {
             >
               → {block.label}
             </a>
+          );
+        }
+        if (block.type === "image") {
+          return (
+            <img
+              key={i}
+              src={block.src}
+              alt=""
+              className="w-full rounded-xl"
+            />
+          );
+        }
+        if (block.type === "carousel") {
+          return (
+            <div key={i} className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-1">
+              {block.images.map((src, si) => (
+                <img
+                  key={si}
+                  src={src}
+                  alt=""
+                  className="shrink-0 rounded-xl snap-center"
+                  style={{ width: "80%", maxWidth: "320px" }}
+                />
+              ))}
+            </div>
           );
         }
         return null;
